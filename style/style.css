@@ -1,0 +1,31 @@
+.card {
+    padding: 10px 10px;
+}
+
+.display-4 {
+  margin: 15px 0px;
+}
+
+.ReactTable {
+  font-size: 14px;
+}
+
+.ReactTable .rt-tr:hover {
+  cursor: pointer;
+}
+
+.TextRightAlign {
+  text-align: right;
+}
+
+.TextLeftAlign {
+  text-align: left;
+}
+
+.TextMiddleAlign {
+  text-align: center;
+}
+
+.toggle {
+  float: right
+}
