@@ -1,11 +1,14 @@
 import { coinsRef } from '../services/firebase-service';
-import { getAllCoinInfo } from '../services/coin-price-service';
+import { getAllCoinInfo, getCoinChart } from '../services/coin-price-service';
 import {
     FETCH_COINS,
     SET_TOTALS, 
     TOGGLE_BTC,
-    SELECT_ROW
+    FETCH_COIN_DETAILS,
+    FETCH_COIN_CHART
 } from './types'
+
+// TODO: Make all of these actions use Redux Thunk with dispatch
 
 /* 
     - Pulls coins from Firebase and converts to array 
@@ -25,7 +28,7 @@ export function fetchCoins() {
             for (let coin in coins) {
                 tickerArray.push(coins[coin].ticker);
             }
-            const extraCoinInfo = await getAllCoinInfo(tickerArray)
+            const extraCoinInfo = await getAllCoinInfo(tickerArray);
 
             // Portfolio values
             let btcTotal = 0;
@@ -92,15 +95,23 @@ export function fetchCoins() {
     };
 }
 
-export function fetchCoinDetails(key) {
+export function fetchCoinDetails(coin) {
+    return dispatch => {
+        dispatch(fetchCoinChart(coin.ticker, 29));
+        dispatch({
+            type: FETCH_COIN_DETAILS,
+            payload: coin
+        });
+    };
+}
+
+export function fetchCoinChart(ticker, days) {
     return async dispatch => {
-        // Grabs specific coin record from firebase
-        var coin = await coinsRef.child(key).once('value')
-            .then(res => coin = res.val());
-        // dispatch({
-        //     type: FETCH_COIN_DETAILS,
-        //     payload: coin 
-        // });
+        const chart = await getCoinChart(ticker, days);
+        dispatch({
+            type: FETCH_COIN_CHART,
+            payload: chart
+        });
     };
 }
 
@@ -122,12 +133,7 @@ export function updateBtcToggle(bool) {
     };
 }
 
-export function selectRow(rowKey) {
-    return {
-        type: SELECT_ROW, 
-        payload: rowKey
-    };
-}
+
 
 // export const addCoin = newCoin => async dispatch => {
 //     coinsRef.push().set(newCoin);

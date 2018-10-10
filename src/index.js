@@ -11,6 +11,11 @@ import reducers from './reducers';
 import PortfolioSummary from './components/portfolio_summary';
 import CoinTable from './components/coin_table';
 import CoinDetails from './components/coin_details';
+import Display from './components/coin_chart/display';
+
+// import './../style/style.css';
+//import './style.css';
+
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 
@@ -20,6 +25,7 @@ ReactDOM.render(
       <PortfolioSummary />
       <CoinTable />
       <CoinDetails />
+      <Display />
     </div>
   </Provider>
   , document.querySelector('.container'));

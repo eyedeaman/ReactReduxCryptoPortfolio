@@ -1,51 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCoinDetails } from '../actions/index';
-
-// import { actionCreator } from '../actions';
-
-
-//Need to add this component to a route in src index.js!
+import _ from 'lodash';
+import {getCoinChart} from '../services/coin-price-service';
 
 class CoinDetails extends Component {
     render() {
-        const { selectedRow } = this.props;
-
-        if (!selectedRow) {
+        const { coinDetails } = this.props;
+        if (_.isEmpty(coinDetails)) {
             return (
                 <div>
                     <h1 className="display-4">Coin Details</h1>
-                    <div className="row">
-                    <div className="col-sm-6">
-                        <div className="card">
-                            <p className="card-text"><i>Select a coin to see details</i></p>
-                        </div>
-                    </div>
-                    </div>
+                        <p><i>Select a coin to see details</i></p>
                 </div>
             );
         }
-        this.props.fetchCoinDetails(selectedRow);
-        return (
+        getCoinChart(coinDetails.ticker, 30);
+        return (   
             <div>
-                <h1 className="display-4">Coin Details</h1>
-                <div className="row">
-                    <div className="col-sm-6">
-                        <div className="card">
-                            <h5 className="card-title">{selectedRow}</h5>
-                            <p className="card-text">text</p>
-                        </div>
+                <h1 className="display-4">Coin Details: {coinDetails.ticker}</h1>
+                {/* <div className="coin-detail-container">
+                    <div className="coin-detail-row">
+                        <span className="coin-detail-column">Ticker </span>
+                        <span className="coin-detail-column">{coinDetails.ticker}</span>
                     </div>
-                </div>
-        </div>
+                    <div className="coin-detail-row">
+                        <span className="coin-detail-column">Holdings(BTC) </span>
+                        <span className="coin-detail-column">{_.round(coinDetails.holdingsBTC,3)} BTC</span>
+                    </div>
+                    <div className="coin-detail-row">
+                        <span className="coin-detail-column">Holdings(USD) </span>
+                        <span className="coin-detail-column">{_.round(coinDetails.holdingsUSD)} USD</span>
+                    </div>
+                    <div className="coin-detail-row">
+                        <span className="coin-detail-column">Amount </span>
+                        <span className="coin-detail-column">{_.round(coinDetails.amount,2)}</span>
+                    </div>
+                    <div className="coin-detail-row">
+                        <span className="coin-detail-column">Profit(%) </span>
+                        <span className="coin-detail-column">{coinDetails.profitLossBTCPercent.toFixed(1)} %</span>
+                    </div>
+                </div> */}
+            </div>
         );
     }
 }
 
 function mapStateToProps(state) {
    return {
-        selectedRow: state.selectedRow
+        coinDetails: state.coinDetails
    };
 }
 
-export default connect(mapStateToProps, {fetchCoinDetails})(CoinDetails);
+export default connect(mapStateToProps)(CoinDetails);

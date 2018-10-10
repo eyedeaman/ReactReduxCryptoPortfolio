@@ -1,5 +1,7 @@
 import axios from 'axios';
 import 'babel-polyfill';
+import moment from 'moment';
+import * as CurrencyFormat  from 'react-currency-format';
 
 const ROOT_URL = 'https://min-api.cryptocompare.com/data/'
 
@@ -33,10 +35,6 @@ export async function getAllCoinInfo(tickers) {
     return returnArray;
 }
 
-export async function getCoinInfo(ticker) {
-    
-}
-
 async function getCoinImages(tickers) {
     const baseUrl = 'https://www.cryptocompare.com';
     var imageUrls = []
@@ -55,3 +53,36 @@ async function getCoinImages(tickers) {
     return imageUrls;
 }
 
+export async function getCoinChart(ticker, days) {
+    let usdData = await axios.get(`${ROOT_URL}histoday?fsym=${ticker}&tsym=USD&limit=${days}`)
+        .then(res => usdData = res.data.Data);
+    let btcData = await axios.get(`${ROOT_URL}histoday?fsym=${ticker}&tsym=BTC&limit=${days}`)
+        .then(res => btcData = res.data.Data);
+
+    usdData = usdData.map((obj, index) => {
+        // Converts UNIX timestamp to local date
+        let date = new Date(obj.time*1000).toLocaleDateString();
+        date = date.split(' ')[0];
+        return {
+            d: date, 
+            p: obj.close.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }), // Formatted string
+            x: index, //Index of array
+            y: obj.close // Unformatted string
+        }
+    });
+    btcData = btcData.map((obj, index) => {
+        let date = new Date(obj.time*1000).toLocaleDateString();
+        date = date.split(' ')[0];
+        return {
+            d: date, 
+            p: obj.close+ ' BTC', // Formatted string
+            x: index, //Index of array
+            y: obj.close // Unformatted string
+        }
+    });
+    return {
+        days: days+1,
+        usdChart: usdData,
+        btcChart: btcData
+    };
+}

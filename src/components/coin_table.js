@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as CurrencyFormat  from 'react-currency-format';
 import ToggleButton from 'react-toggle-button'
 
-import { fetchCoins, updateBtcToggle, selectRow } from '../actions';
+import { fetchCoins, updateBtcToggle, fetchCoinDetails } from '../actions';
 
 //Need to add this component to a route in src index.js!
 
@@ -25,6 +25,7 @@ class CoinTable extends Component {
         var CurrencyFormat = require('react-currency-format');
         const { coins } = this.props;
         const { displayInBTC } = this.props;
+        const { coinDetails } = this.props;
         const btcColumns = [{
                 Header: 'Id',
                 accessor: 'id',
@@ -224,46 +225,28 @@ class CoinTable extends Component {
                         if (rowInfo && rowInfo.row) {
                             return {
                                 onClick: () => {
-                                    this.props.selectRow(rowInfo.row.id)
+                                    this.props.fetchCoinDetails(rowInfo.original);
                                 }, 
                                 style: {
-                                    background: rowInfo.row.id === this.props.selectedRow ? '#d8d8d8' : 'white'
+                                    background: rowInfo.row.id === coinDetails.id ? '#d8d8d8' : 'white'
                                 }   
                             }
                         } else {
                             return {}
                         }
                       }}
-                    // getTrProps={(state, rowInfo) => {
-                    //     if (rowInfo && rowInfo.row) {
-                    //       return {
-                    //         onClick: (e) => {
-                    //           that.setState({
-                    //             selected: rowInfo.index
-                    //           })
-                    //         },
-                    //         style: {
-                    //           background: rowInfo.index === this.state.selected ? '#00afec' : 'white',
-                    //           color: rowInfo.index === this.state.selected ? 'white' : 'black'
-                    //         }
-                    //       }
-                    //     }else{
-                    //       return {}
-                    //     }
-                    //   }
                 />
             </div>
         );
     }
 }
 
-
 function mapStateToProps(state) {
    return { 
         coins: state.coins,
         displayInBTC: state.displayInBTC,
-        selectedRow: state.selectedRow
+        coinDetails: state.coinDetails
     };
 }
 
-export default connect(mapStateToProps, { fetchCoins, updateBtcToggle, selectRow })(CoinTable);
+export default connect(mapStateToProps, { fetchCoins, updateBtcToggle, fetchCoinDetails })(CoinTable);
