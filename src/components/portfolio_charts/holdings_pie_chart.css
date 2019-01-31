@@ -1,0 +1,6 @@
+.piechart {
+    width: inherit;
+    height: inherit;
+    overflow: hidden;
+    margin: auto;
+}

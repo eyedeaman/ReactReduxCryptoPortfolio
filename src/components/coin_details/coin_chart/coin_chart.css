@@ -1,0 +1,11 @@
+.popup {
+    min-height: 50px;
+  }
+
+h5 {
+  color: #264653;
+}
+
+.coin_chart {
+  max-height: 75%;
+}

@@ -1,0 +1,34 @@
+.coin-details {
+  margin-top: -5px;
+  position: inherit; /* Without this tooltip is off-center */
+  height: 50%;
+}
+
+.details {
+  background-color: #fffaf2;
+  padding: 10px;
+  margin-bottom: 10px;
+  overflow: hidden; /* Needed to make background color cover whole div */
+  font-size: 0.8em;
+  max-height: 25%;
+}
+
+.details p {
+  /* background-color: #E9C46A; */
+  margin-bottom: 0.25rem;
+}
+
+.details_left {
+  float: left;
+}
+
+.details_right {
+  float: right;
+}
+
+.details_labels {
+  font-weight: 700;
+}
+
+.details_values {
+}

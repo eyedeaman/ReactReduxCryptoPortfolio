@@ -1,3 +1,8 @@
+body {
+  font-family: 'Oxygen', sans-serif;
+  background-color: #f7f7f8;
+}
+
 .coin-detail-image {
   border-radius: 30%;
   max-height: 100px;
@@ -11,6 +16,7 @@
   margin: 15px 0px;
 }
 
+/* Coin Table */
 .ReactTable {
   font-size: 14px;
 }
@@ -35,6 +41,7 @@
   float: right;
 }
 
+/* Coin details */
 .coin-detail-container {
   max-width: 50%;
 }
@@ -48,3 +55,20 @@
   flex: 50%;
   float: left;
 }
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidebar */
+  padding: 10px 10px;
+  margin-top: 50px;
+  height: 96.5vh;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+h5 {
+  color: #264653;
+}
+

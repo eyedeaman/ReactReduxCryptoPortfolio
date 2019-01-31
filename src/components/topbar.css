@@ -1,0 +1,49 @@
+/* Topbar */
+.topbar {
+    width: 100%;
+    height: 51px;
+    top: 0;
+    z-index: 100;
+    position: fixed;
+}
+  
+.topbar .banner {
+    width: 200px;
+    height: 50px;
+    background-color: #264653;
+    /* background: #444444; */
+    border-bottom: 1px solid #6c6c6c;
+    float: left;
+    color: #dcdcdc;
+    text-align: center;
+    line-height: 50px;
+    font-size: 1.25rem;
+    font-weight: 300;
+    padding-right: 10px;
+}
+
+.topbar .menu {
+    height: 50px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.banner img {
+    float: left;
+    border: 1px solid rgba(108, 108, 108, .5);
+    margin: 10px 10px;
+}
+
+.banner img:hover {
+    cursor: pointer;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    font-size: 1rem;
+    float: right;
+    margin-right: 10px;
+}

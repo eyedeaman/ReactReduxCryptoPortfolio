@@ -1,0 +1,45 @@
+.cancel {
+  padding: 10px;
+  /* position: fixed;
+    bottom: 0; */
+  width: 200px;
+}
+
+.cancel a {
+  text-decoration: none;
+}
+
+.add_coin_form {
+  padding: 10px;
+}
+
+.form-group {
+  /* padding: 0px 10px; */
+}
+
+.form-group label {
+  color: #dcdcdc;
+}
+
+.form-group input {
+  width: 100%;
+}
+
+.add_coin_cancel {
+  /* width: 40%; */
+  float: left;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.add_coin_cancel a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.add_coin_submit {
+  /* width: 55%; */
+  float: right;
+  text-align: center;
+  font-size: 0.9em;
+}

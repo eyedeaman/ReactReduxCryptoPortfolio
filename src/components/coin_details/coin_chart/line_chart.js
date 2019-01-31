@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-//import "./line_chart.css";
+import "./line_chart.css";
 
 class LineChart extends Component {
   constructor(props) {
@@ -26,8 +26,8 @@ class LineChart extends Component {
   }
   // GET SVG COORDINATES
   getSvgX(x) {
-    const {svgWidth, yLabelSize} = this.props;
-    return yLabelSize + (x / this.getX().max * (svgWidth - yLabelSize));
+    const {width, yLabelSize} = this.props;
+    return yLabelSize + (x / this.getX().max * (width - yLabelSize));
   }
   getSvgY(y) {
     const {svgHeight, xLabelSize} = this.props;
@@ -83,7 +83,7 @@ class LineChart extends Component {
     );
   }
   makeLabels(){
-    const {svgHeight, svgWidth, xLabelSize, yLabelSize} = this.props;
+    const {svgHeight, width, xLabelSize, yLabelSize} = this.props;
     const padding = 5;
     return(
       <g className="linechart_label">
@@ -98,7 +98,7 @@ class LineChart extends Component {
         <text transform={`translate(${yLabelSize}, ${svgHeight})`} textAnchor="start">
           { this.props.data[0].d }
         </text>
-        <text transform={`translate(${svgWidth}, ${svgHeight})`} textAnchor="end">
+        <text transform={`translate(${width}, ${svgHeight})`} textAnchor="end">
           { this.props.data[this.props.data.length - 1].d }
         </text>
       </g>
@@ -106,9 +106,9 @@ class LineChart extends Component {
   }
   // FIND CLOSEST POINT TO MOUSE
   getCoords(e){
-    const {svgWidth, data, yLabelSize} = this.props;
+    const {width, data, yLabelSize} = this.props;
     const svgLocation = document.getElementsByClassName("linechart")[0].getBoundingClientRect();
-    const adjustment = (svgLocation.width - svgWidth) / 2; //takes padding into consideration
+    const adjustment = (svgLocation.width - width) / 2; //takes padding into consideration
     const relativeLoc = e.clientX - svgLocation.left - adjustment;
 
     let svgData = [];
@@ -168,10 +168,16 @@ class LineChart extends Component {
   }
 
   render() {
-    const {svgHeight, svgWidth} = this.props;
-
+    const {svgHeight, width} = this.props;
+  
+    if(width == null) {
+      return(
+        <div></div>
+      );
+    }
+    
     return (
-      <svg  width={svgWidth} height={svgHeight} viewBox={`0 0 ${svgWidth} ${svgHeight}`} className={'linechart'}
+      <svg  width={width} height={svgHeight} viewBox={`0 0 ${width} ${svgHeight}`} className={'linechart'}
             onMouseLeave={ () => this.stopHover() }
             onMouseMove={ (e) => this.getCoords(e) } >
         <g>
@@ -186,10 +192,11 @@ class LineChart extends Component {
     );
   }
 }
+
 // DEFAULT PROPS
+// For some reason need to set this here and in render function
 LineChart.defaultProps = {
-  data: [],
-  color: '#2196F3',
+  color: '#264653',
   pointRadius: 5,
   svgHeight: 300,
   svgWidth: 500,

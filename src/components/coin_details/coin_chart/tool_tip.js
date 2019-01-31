@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import './tool_tip.css';
+import './tool_tip.css';
 
 class ToolTip extends Component {
 
@@ -11,13 +11,6 @@ class ToolTip extends Component {
     placementStyles.width = width + 'px';
     placementStyles.left = hoverLoc + svgLocation.left - (width/2);
     
-    if(svgLocation == null) {
-      return(
-        <div></div>
-      );
-    } else {
-      
-    }
     return (
       <div className='hover' style={ placementStyles }>
         <div className='date'>{ activePoint.d }</div>

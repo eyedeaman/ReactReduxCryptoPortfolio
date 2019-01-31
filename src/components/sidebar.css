@@ -1,0 +1,97 @@
+/* Sidebar  */
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  background-color: #264653;
+  /* background-color: #444444; */
+  overflow-x: hidden;
+  overflow: auto;
+}
+
+/* .sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #dcdcdc;
+    display: block;
+} */
+
+.loader {
+  margin-left: 65px; /* Centers the loading spinner */
+  margin-top: 35px;
+}
+
+/* .sidebar a:hover {
+    color: #f1f1f1;
+} */
+
+.coincard {
+  border-bottom: 1px solid rgba(108, 108, 108, 0.5);
+  color: #dcdcdc;
+  /* padding: 10px 10px; */
+  padding: 10px 10px 10px 10px;
+  transition: 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.coincard:hover {
+  cursor: pointer;
+  background-color: rgba(108, 108, 108, 0.3);
+}
+
+.coincard img {
+  float: left;
+  border: 1px solid rgba(108, 108, 108, 0.3);
+}
+
+.coincard h5 {
+  float: left;
+}
+
+.coin_left {
+  float: left;
+  font-size: 0.9em;
+  position: sticky;
+}
+
+.coin_right {
+  float: right;
+  font-size: 0.9em;
+  position: sticky;
+}
+
+.coin_right span {
+  float: right;
+}
+
+.coin_label {
+  color: #a7a7a7;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.ticker {
+  /* Positions ticker in bottom-left corner of card */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 1.1em;
+  line-height: 1.1;
+  padding: 50px 0px 5px 5px;
+  overflow: hidden;
+}
+
+.add_coin {
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 200px;
+}
+
+.add_coin a {
+  text-decoration: none;
+}

@@ -65,7 +65,9 @@ class PortfolioSummary extends Component {
 }
 
 function mapStateToProps(state) {
-    return { portfolioTotals: state.portfolioTotals};
+    return { 
+        portfolioTotals: state.portfolioTotals
+    };
  }
  
 export default connect(mapStateToProps, { setPortfolioTotals })(PortfolioSummary);

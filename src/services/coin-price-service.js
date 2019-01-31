@@ -54,9 +54,10 @@ async function getCoinImages(tickers) {
 }
 
 export async function getCoinChart(ticker, days) {
-    let usdData = await axios.get(`${ROOT_URL}histoday?fsym=${ticker}&tsym=USD&limit=${days}`)
+    // Would be good to append this array with the current day 
+    let usdData = await axios.get(`${ROOT_URL}histoday?fsym=${ticker}&tsym=USD&limit=${days-1}`)
         .then(res => usdData = res.data.Data);
-    let btcData = await axios.get(`${ROOT_URL}histoday?fsym=${ticker}&tsym=BTC&limit=${days}`)
+    let btcData = await axios.get(`${ROOT_URL}histoday?fsym=${ticker}&tsym=BTC&limit=${days-1}`)
         .then(res => btcData = res.data.Data);
 
     usdData = usdData.map((obj, index) => {
@@ -81,7 +82,7 @@ export async function getCoinChart(ticker, days) {
         }
     });
     return {
-        days: days+1,
+        days: days,
         usdChart: usdData,
         btcChart: btcData
     };
